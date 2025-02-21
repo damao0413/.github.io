@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>早读与教学积分系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧：学生气泡 -->
+        <div class="left-panel">
+            <div class="bubble-container"></div>
+            <button id="undo-button" onclick="undoLastScore()">撤销加分</button>
+        </div>
+
+        <!-- 右侧：时间、目标、积分榜、按钮 -->
+        <div class="right-panel">
+            <div class="time-display">
+                <h2>时长：<span id="stopwatch-time">00:00:00</span></h2>
+                <div class="stopwatch-controls">
+                    <button id="start-btn" onclick="startTimer()">开始</button>
+                    <button id="pause-btn" onclick="pauseTimer()">暂停</button>
+                    <button id="reset-btn" onclick="resetTimer()">重置</button>
+                </div>
+            </div>
+            <div class="goal-input">
+                <h3>早读目标：</h3>
+                <textarea id="goal-text" placeholder="请输入早读目标..."></textarea>
+                <div class="font-controls">
+                    <label for="font-size">字体大小：</label>
+                    <input type="number" id="font-size" min="10" max="30" value="16">
+                    <label for="font-family">字体：</label>
+                    <select id="font-family">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Georgia">Georgia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="score-display">
+                <h2>积分榜</h2>
+                <ul id="score-list"></ul>
+            </div>
+            <!-- 右侧按钮 -->
+            <div class="right-buttons">
+                <button id="morning-read-btn" class="active" onclick="switchMode('morning-read')">早读版</button>
+                <button id="teaching-btn" onclick="switchMode('teaching')">教学版</button>
+                <button id="score-library-btn" onclick="toggleScoreLibrary()">积分库</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 积分库界面 -->
+    <div class="score-library" style="display: none;">
+        <div class="library-header">
+            <h2>积分库</h2>
+            <button id="clear-all-scores" onclick="clearAllScores()">全体清零</button>
+        </div>
+        <table id="score-table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>单日积分</th>
+                    <th>单周积分</th>
+                    <th>单月积分</th>
+                    <th>合计</th>
+                    <th>积分明细</th>
+                </tr>
+            </thead>
+            <tbody id="score-table-body">
+                <!-- 数据行将动态生成 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 积分明细三级界面 -->
+    <div class="score-details" style="display: none;">
+        <div class="details-header">
+            <h3>积分明细</h3>
+            <button class="close-btn" onclick="closeScoreDetails()">关闭</button>
+        </div>
+        <div class="details-content">
+            <ul id="score-details-list"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
